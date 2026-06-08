@@ -1,0 +1,88 @@
+2026-06-08 12:12:53,866 INFO crawler run started
+2026-06-08 12:12:53,866 INFO start crawler module=crawl_nfra
+2026-06-08 12:13:07,992 INFO finish crawler module=crawl_nfra rows=40 duplicates=156 failed=3 skipped=3 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:13:07,992 INFO start crawler module=crawl_csrc
+2026-06-08 12:13:33,320 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:13:33,321 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:13:38,188 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:13:38,188 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:14:53,237 INFO finish crawler module=crawl_eastmoney_guba rows=360 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 12:14:53,248 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 12:16:13,251 INFO crawler run started
+2026-06-08 12:16:13,251 INFO start crawler module=crawl_nfra
+2026-06-08 12:16:13,957 INFO finish crawler module=crawl_nfra rows=0 duplicates=0 failed=1 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:16:13,957 INFO start crawler module=crawl_csrc
+2026-06-08 12:16:42,497 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:16:42,497 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:16:47,506 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:16:47,507 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:18:13,996 INFO finish crawler module=crawl_eastmoney_guba rows=995 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 12:18:14,004 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 12:22:35,720 INFO crawler run started
+2026-06-08 12:22:35,720 INFO start crawler module=crawl_nfra
+2026-06-08 12:22:41,813 INFO finish crawler module=crawl_nfra rows=0 duplicates=0 failed=1 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:22:41,813 INFO start crawler module=crawl_csrc
+2026-06-08 12:23:10,873 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:23:10,876 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:23:15,152 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:23:15,153 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:25:29,642 INFO finish crawler module=crawl_eastmoney_guba rows=995 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 12:25:30,179 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 12:29:04,413 INFO crawler run started
+2026-06-08 12:29:04,413 INFO start crawler module=crawl_nfra
+2026-06-08 12:34:05,372 INFO finish crawler module=crawl_nfra rows=54 duplicates=252 failed=1 skipped=1 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:34:05,372 INFO start crawler module=crawl_csrc
+2026-06-08 12:34:15,732 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:34:15,733 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:34:20,480 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:34:20,480 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:37:04,853 INFO crawler run started
+2026-06-08 12:37:04,854 INFO start crawler module=crawl_nfra
+2026-06-08 12:37:10,762 INFO finish crawler module=crawl_nfra rows=21 duplicates=59 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:37:10,770 INFO start crawler module=crawl_csrc
+2026-06-08 12:37:47,215 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:37:47,215 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:37:53,022 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:37:53,022 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:38:53,881 INFO finish crawler module=crawl_eastmoney_guba rows=1100 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 12:38:53,912 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 12:42:55,425 INFO crawler run started
+2026-06-08 12:42:55,426 INFO start crawler module=crawl_nfra
+2026-06-08 12:42:58,999 INFO finish crawler module=crawl_nfra rows=80 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:42:58,999 INFO start crawler module=crawl_csrc
+2026-06-08 12:43:25,486 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:43:25,486 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:43:31,132 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:43:31,134 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:44:29,655 INFO finish crawler module=crawl_eastmoney_guba rows=1100 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 12:44:29,666 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 12:46:23,086 INFO crawler run started
+2026-06-08 12:46:23,087 INFO start crawler module=crawl_nfra
+2026-06-08 12:46:27,404 INFO finish crawler module=crawl_nfra rows=80 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 12:46:27,404 INFO start crawler module=crawl_csrc
+2026-06-08 12:46:46,081 INFO finish crawler module=crawl_csrc rows=16 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 12:46:46,081 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 12:46:51,494 INFO finish crawler module=crawl_eastmoney_news rows=6 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 12:46:51,494 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 12:49:01,454 INFO finish crawler module=crawl_eastmoney_guba rows=995 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 12:49:01,469 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 13:37:34,556 INFO crawler run started
+2026-06-08 13:37:34,556 INFO start crawler module=crawl_nfra
+2026-06-08 13:37:40,581 INFO finish crawler module=crawl_nfra rows=80 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 13:37:40,581 INFO start crawler module=crawl_csrc
+2026-06-08 13:37:51,410 INFO finish crawler module=crawl_csrc rows=50 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 13:37:51,410 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 13:38:14,506 INFO finish crawler module=crawl_eastmoney_news rows=50 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 13:38:14,506 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 13:39:15,806 INFO finish crawler module=crawl_eastmoney_guba rows=1100 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 13:39:16,674 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md
+2026-06-08 14:33:42,920 INFO crawler run started
+2026-06-08 14:33:42,921 INFO start crawler module=crawl_nfra
+2026-06-08 14:33:46,146 INFO finish crawler module=crawl_nfra rows=150 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_nfra_raw.csv
+2026-06-08 14:33:46,146 INFO start crawler module=crawl_csrc
+2026-06-08 14:34:11,731 INFO finish crawler module=crawl_csrc rows=150 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\regulation_csrc_raw.csv
+2026-06-08 14:34:11,731 INFO start crawler module=crawl_eastmoney_news
+2026-06-08 14:35:26,979 INFO finish crawler module=crawl_eastmoney_news rows=200 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\news_raw.csv
+2026-06-08 14:35:26,979 INFO start crawler module=crawl_eastmoney_guba
+2026-06-08 14:36:03,734 INFO finish crawler module=crawl_eastmoney_guba rows=1100 duplicates=0 failed=0 skipped=0 csv=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\raw\comment_raw.csv
+2026-06-08 14:36:03,747 INFO report written path=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\docs\report\a_stage1_crawler_review.md

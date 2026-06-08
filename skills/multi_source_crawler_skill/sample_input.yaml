@@ -1,0 +1,65 @@
+project_root: .
+output_dir: data/raw
+log_path: outputs/logs/crawler_run.log
+sources:
+  - name: NFRA
+    type: regulation
+    output: regulation_nfra_raw.csv
+    required_fields:
+      - source
+      - title
+      - publish_time
+      - decision_no
+      - punished_entity
+      - violation_text
+      - penalty_text
+      - penalty_amount_raw
+      - agency
+      - url
+      - crawl_time
+  - name: CSRC
+    type: regulation
+    output: regulation_csrc_raw.csv
+    required_fields:
+      - source
+      - title
+      - publish_time
+      - party
+      - violation_text
+      - penalty_text
+      - penalty_amount_raw
+      - market_ban_raw
+      - url
+      - crawl_time
+  - name: eastmoney_news
+    type: news
+    output: news_raw.csv
+    required_fields:
+      - source
+      - title
+      - publish_time
+      - channel
+      - content
+      - url
+      - crawl_time
+  - name: eastmoney_guba
+    type: comment
+    output: comment_raw.csv
+    required_fields:
+      - source
+      - title
+      - publish_time
+      - stock_or_entity
+      - content
+      - read_count
+      - comment_count
+      - url
+      - crawl_time
+quality_gate:
+  min_total_effective_rows: 1000
+  require_non_empty_url: true
+  forbid_stage_b_fields:
+    - risk_type
+    - risk_level
+    - sentiment
+    - risk_score

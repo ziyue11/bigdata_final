@@ -1,0 +1,3 @@
+record_id,source_type,source,title,event_date,entity_name,raw_text,penalty_amount,agency,region,url
+REG_000001,regulation,NFRA,国家金融监督管理总局行政处罚信息公示列表 - 示例银行股份有限公司,2026-06-05,示例银行股份有限公司,"重要信息系统风险管控不到位。
+对示例银行股份有限公司罚款50万元。",50,金融监管总局,,https://example.com/nfra/item

@@ -1,0 +1,9 @@
+Terminal snapshot example:
+
+python src/crawler/run_crawlers.py
+
+NFRA rows: 150 -> data/raw/regulation_nfra_raw.csv
+CSRC rows: 150 -> data/raw/regulation_csrc_raw.csv
+News rows: 200 -> data/raw/news_raw.csv
+Comment rows: 1100 -> data/raw/comment_raw.csv
+Log: outputs/logs/crawler_run.log

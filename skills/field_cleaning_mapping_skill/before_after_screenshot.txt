@@ -1,0 +1,17 @@
+Before/after terminal snapshot example:
+
+Input:
+data/raw/regulation_nfra_raw.csv
+source,title,publish_time,decision_no,punished_entity,violation_text,penalty_text,penalty_amount_raw,agency,url,crawl_time
+
+Command:
+python src/preprocess/run_preprocess.py
+
+Output:
+data/processed/regulation_cleaned.csv
+record_id,source_type,source,title,event_date,entity_name,raw_text,penalty_amount,agency,region,url
+
+Quality:
+fields_ok=True
+encoding=UTF-8-sig
+no_risk_event_table=True

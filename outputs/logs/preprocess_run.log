@@ -1,0 +1,5 @@
+2026-06-08 15:05:07,539 INFO Start A stage2 preprocessing
+2026-06-08 15:05:08,010 INFO regulation_cleaned.csv raw=300 output=226 invalid_removed=0 duplicate_removed=74 fields=record_id,source_type,source,title,event_date,entity_name,raw_text,penalty_amount,agency,region,url
+2026-06-08 15:05:08,010 INFO news_cleaned.csv raw=200 output=200 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,content,mentioned_entity,channel,url
+2026-06-08 15:05:08,010 INFO comment_cleaned.csv raw=1100 output=1100 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,content,mentioned_entity,read_count,comment_count,url
+2026-06-08 15:05:08,011 INFO Finished A stage2 preprocessing
