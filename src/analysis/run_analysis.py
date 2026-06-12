@@ -22,6 +22,9 @@ def main():
     # 确保日期格式正确，并提取月份用于趋势分析
     df['event_date'] = pd.to_datetime(df['event_date'], errors='coerce')
     df['month'] = df['event_date'].dt.to_period('M').astype(str)
+    if 'penalty_amount' not in df.columns:
+        df['penalty_amount'] = 0
+    df['penalty_amount'] = pd.to_numeric(df['penalty_amount'], errors='coerce').fillna(0)
     
     # -------------------------------------------------------------------------
     # 1. summary_stats.csv (严格对齐 7 个指标，字段名: metric,value)
@@ -29,10 +32,13 @@ def main():
     print("📊 正在统计: 1. summary_stats.csv")
     total_events = float(len(df))
     high_risk_events = float(len(df[df['risk_level'] == '高']))
-    regulation_events = float(len(df[df['source_type'] == '监管处罚']))
-    news_events = float(len(df[df['source_type'] == '新闻舆情']))
-    comment_events = float(news_events * 3.0) 
-    total_penalty_amount = 1250.5  
+    regulation_events = float(len(df[df['source_type'] == 'regulation']))
+    news_events = float(len(df[df['source_type'] == 'news']))
+    comment_events = float(len(df[df['source_type'] == 'comment']))
+    if 'penalty_amount' in df.columns:
+        total_penalty_amount = float(pd.to_numeric(df['penalty_amount'], errors='coerce').fillna(0).sum())
+    else:
+        total_penalty_amount = 0.0
     neg_ratio = len(df[df['sentiment'] == '负面']) / total_events if total_events > 0 else 0.35
     
     summary_data = {
@@ -55,10 +61,10 @@ def main():
     print("🔠 正在统计: 2. risk_type_stats.csv")
     type_stats = df.groupby('risk_type').agg(
         event_count=('record_id', 'count'),
+        total_penalty_amount=('penalty_amount', 'sum'),
         avg_risk_score=('risk_score', 'mean'),
         high_risk_count=('risk_level', lambda x: (x == '高').sum())
     ).reset_index()
-    type_stats['total_penalty_amount'] = type_stats['event_count'] * 15.5
     # 严格重排字段顺序
     type_stats = type_stats[['risk_type', 'event_count', 'total_penalty_amount', 'avg_risk_score', 'high_risk_count']]
     type_stats.to_csv(f"{output_dir}/risk_type_stats.csv", index=False)
@@ -68,13 +74,13 @@ def main():
     # -------------------------------------------------------------------------
     print("📅 正在统计: 3. risk_time_trend.csv")
     time_trend = df.groupby('month').agg(
-        regulation_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == '监管处罚').sum()),
-        news_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == '新闻舆情').sum()),
+        regulation_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == 'regulation').sum()),
+        news_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == 'news').sum()),
+        comment_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == 'comment').sum()),
         high_risk_count=('risk_level', lambda x: (x == '高').sum()),
-        avg_risk_score=('risk_score', 'mean')
+        avg_risk_score=('risk_score', 'mean'),
+        total_penalty_amount=('penalty_amount', lambda x: pd.to_numeric(x, errors='coerce').fillna(0).sum())
     ).reset_index()
-    time_trend['comment_count'] = time_trend['news_count'] * 3
-    time_trend['total_penalty_amount'] = (time_trend['regulation_count'] + time_trend['news_count']) * 12.0
     # 严格重排字段顺序
     time_trend = time_trend[['month', 'regulation_count', 'news_count', 'comment_count', 'high_risk_count', 'total_penalty_amount', 'avg_risk_score']]
     time_trend.to_csv(f"{output_dir}/risk_time_trend.csv", index=False)
@@ -85,10 +91,10 @@ def main():
     print("📍 正在统计: 4. region_risk_stats.csv")
     region_stats = df.groupby('region').agg(
         event_count=('record_id', 'count'),
+        total_penalty_amount=('penalty_amount', 'sum'),
         high_risk_count=('risk_level', lambda x: (x == '高').sum()),
         avg_risk_score=('risk_score', 'mean')
     ).reset_index()
-    region_stats['total_penalty_amount'] = region_stats['event_count'] * 8.5
     # 严格重排字段顺序
     region_stats = region_stats[['region', 'event_count', 'total_penalty_amount', 'high_risk_count', 'avg_risk_score']]
     region_stats.to_csv(f"{output_dir}/region_risk_stats.csv", index=False)
@@ -101,9 +107,9 @@ def main():
         entity_type=('entity_type', 'first'),
         region=('region', 'first'),
         event_count=('record_id', 'count'),
+        total_penalty_amount=('penalty_amount', 'sum'),
         avg_risk_score=('risk_score', 'mean')
     ).reset_index()
-    entity_stats['total_penalty_amount'] = entity_stats['event_count'] * 62.5
     entity_stats['risk_level'] = entity_stats['avg_risk_score'].apply(lambda x: '高' if x > 60 else ('中' if x > 30 else '低'))
     # 严格排序与截取字段
     entity_stats = entity_stats.sort_values(by='avg_risk_score', ascending=False)
@@ -115,12 +121,15 @@ def main():
     # -------------------------------------------------------------------------
     print("📣 正在统计: 6. sentiment_trend.csv")
     sent_trend = df.groupby('month').agg(
-        negative_news_count=('sentiment', lambda x: (x == '负面').sum()),
+        negative_news_count=('sentiment', lambda x: ((x == '负面') & (df.loc[x.index, 'source_type'] == 'news')).sum()),
+        negative_comment_count=('sentiment', lambda x: ((x == '负面') & (df.loc[x.index, 'source_type'] == 'comment')).sum()),
         avg_sentiment_score=('sentiment_score', 'mean'),
         total_in_month=('record_id', 'count')
     ).reset_index()
-    sent_trend['negative_comment_count'] = sent_trend['negative_news_count'] * 3
-    sent_trend['negative_ratio'] = (sent_trend['negative_news_count'] / sent_trend['total_in_month']).round(4)
+    sent_trend['negative_ratio'] = (
+        (sent_trend['negative_news_count'] + sent_trend['negative_comment_count'])
+        / sent_trend['total_in_month']
+    ).round(4)
     # 严格重排字段顺序
     sent_trend = sent_trend[['month', 'negative_news_count', 'negative_comment_count', 'negative_ratio', 'avg_sentiment_score']]
     sent_trend.to_csv(f"{output_dir}/sentiment_trend.csv", index=False)
