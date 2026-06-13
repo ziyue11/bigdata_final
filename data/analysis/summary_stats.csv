@@ -3,6 +3,6 @@ total_events,1526.0
 regulation_events,226.0
 news_events,200.0
 comment_events,1100.0
-high_risk_events,61.0
+high_risk_events,62.0
 total_penalty_amount,398553.09400000004
-negative_sentiment_ratio,0.8945
+negative_sentiment_ratio,0.8952
