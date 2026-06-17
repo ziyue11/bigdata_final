@@ -1,0 +1,5 @@
+2026-06-17 08:05:06,099 INFO Start preprocessing industry=medical raw_dir=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\medical\raw
+2026-06-17 08:05:06,498 INFO regulation_cleaned.csv raw=313 output=313 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,entity_name,raw_text,penalty_amount,agency,region,url
+2026-06-17 08:05:06,498 INFO news_cleaned.csv raw=801 output=801 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,content,mentioned_entity,channel,url
+2026-06-17 08:05:06,498 INFO comment_cleaned.csv raw=224 output=224 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,content,mentioned_entity,read_count,comment_count,url
+2026-06-17 08:05:06,500 INFO Finished preprocessing industry=medical

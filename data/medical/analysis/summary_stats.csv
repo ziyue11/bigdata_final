@@ -1,0 +1,8 @@
+﻿metric,value
+total_events,1338.0
+regulation_events,313.0
+news_events,801.0
+comment_events,224.0
+high_risk_events,83.0
+total_penalty_amount,0.0
+negative_sentiment_ratio,0.1151

@@ -1,0 +1,10 @@
+﻿risk_type,event_count,total_penalty_amount,avg_risk_score,high_risk_count
+advertising_risk,49,0,34.902040816326526,3
+dispute_risk,13,0,41.75384615384615,1
+drug_safety_risk,59,0,34.383050847457625,5
+insurance_compliance_risk,328,0,39.050609756097565,46
+medical_device_risk,21,0,32.561904761904756,3
+other_risk,700,0,32.74971428571428,8
+pricing_risk,26,0,31.069230769230767,3
+public_opinion_risk,104,0,25.36923076923077,8
+quality_compliance_risk,38,0,40.373684210526314,6

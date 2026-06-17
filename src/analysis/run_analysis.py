@@ -1,167 +1,171 @@
-# src/analysis/run_analysis.py
+from __future__ import annotations
 
-import os
+import argparse
+import sys
+from pathlib import Path
+
 import pandas as pd
 
-def ensure_dir(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+from pipeline_paths import analysis_dir, processed_dir  # noqa: E402
 
-def main():
-    input_path = 'data/processed/risk_event_table.csv'
-    output_dir = 'data/analysis'
-    ensure_dir(output_dir)
-    
-    if not os.path.exists(input_path):
-        print(f"❌ 找不到核心表 {input_path}，请先运行 build_risk_event_table.py！")
+
+def is_high_risk(series: pd.Series) -> pd.Series:
+    return series.fillna("").astype(str).str.strip().str.lower().eq("high")
+
+
+def is_negative(series: pd.Series) -> pd.Series:
+    return series.fillna("").astype(str).str.strip().str.lower().eq("negative")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--industry", default="finance", help="finance or medical")
+    args = parser.parse_args()
+
+    input_path = processed_dir(args.industry) / "risk_event_table.csv"
+    output_dir = analysis_dir(args.industry)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    if not input_path.exists():
+        print(f"Missing {input_path}; run build_risk_event_table.py first.")
         return
-        
-    print("📈 正在加载风险事件核心底表，正在进行像素级字段对齐统计...")
-    df = pd.read_csv(input_path)
-    
-    # 确保日期格式正确，并提取月份用于趋势分析
-    df['event_date'] = pd.to_datetime(df['event_date'], errors='coerce')
-    df['month'] = df['event_date'].dt.to_period('M').astype(str)
-    if 'penalty_amount' not in df.columns:
-        df['penalty_amount'] = 0
-    df['penalty_amount'] = pd.to_numeric(df['penalty_amount'], errors='coerce').fillna(0)
-    
-    # -------------------------------------------------------------------------
-    # 1. summary_stats.csv (严格对齐 7 个指标，字段名: metric,value)
-    # -------------------------------------------------------------------------
-    print("📊 正在统计: 1. summary_stats.csv")
+
+    df = pd.read_csv(input_path, keep_default_na=False)
+    df["event_date"] = pd.to_datetime(df.get("event_date"), errors="coerce")
+    df["month"] = df["event_date"].dt.to_period("M").astype(str).replace("NaT", "unknown")
+    df["penalty_amount"] = pd.to_numeric(df.get("penalty_amount", 0), errors="coerce").fillna(0)
+    df["risk_score"] = pd.to_numeric(df.get("risk_score", 0), errors="coerce").fillna(0)
+    df["sentiment_score"] = pd.to_numeric(df.get("sentiment_score", 0), errors="coerce").fillna(0)
+    df["entity_name"] = df.get("entity_name", "").fillna("").astype(str).str.strip()
+    df["entity_type"] = df.get("entity_type", "").fillna("").astype(str).str.strip().replace("", "other")
+    df["region"] = df.get("region", "").fillna("").astype(str).str.strip().replace("", "unknown")
+    df["risk_level"] = df.get("risk_level", "").fillna("").astype(str).str.strip().str.lower()
+    df["sentiment"] = df.get("sentiment", "").fillna("").astype(str).str.strip().str.lower()
+
     total_events = float(len(df))
-    high_risk_events = float(len(df[df['risk_level'] == '高']))
-    regulation_events = float(len(df[df['source_type'] == 'regulation']))
-    news_events = float(len(df[df['source_type'] == 'news']))
-    comment_events = float(len(df[df['source_type'] == 'comment']))
-    if 'penalty_amount' in df.columns:
-        total_penalty_amount = float(pd.to_numeric(df['penalty_amount'], errors='coerce').fillna(0).sum())
-    else:
-        total_penalty_amount = 0.0
-    neg_ratio = len(df[df['sentiment'] == '负面']) / total_events if total_events > 0 else 0.35
-    
+    negative_mask = is_negative(df["sentiment"])
+    high_risk_mask = is_high_risk(df["risk_level"])
+
     summary_data = {
         "metric": [
-            "total_events", "regulation_events", "news_events", 
-            "comment_events", "high_risk_events", "total_penalty_amount", 
-            "negative_sentiment_ratio"
+            "total_events",
+            "regulation_events",
+            "news_events",
+            "comment_events",
+            "high_risk_events",
+            "total_penalty_amount",
+            "negative_sentiment_ratio",
         ],
         "value": [
-            total_events, regulation_events, news_events, 
-            comment_events, high_risk_events, total_penalty_amount, 
-            round(neg_ratio, 4)
-        ]
+            total_events,
+            float((df["source_type"] == "regulation").sum()),
+            float((df["source_type"] == "news").sum()),
+            float((df["source_type"] == "comment").sum()),
+            float(high_risk_mask.sum()),
+            float(df["penalty_amount"].sum()),
+            round(float(negative_mask.mean()) if total_events > 0 else 0.0, 4),
+        ],
     }
-    pd.DataFrame(summary_data).to_csv(f"{output_dir}/summary_stats.csv", index=False)
+    pd.DataFrame(summary_data).to_csv(output_dir / "summary_stats.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 2. risk_type_stats.csv (字段: risk_type,event_count,total_penalty_amount,avg_risk_score,high_risk_count)
-    # -------------------------------------------------------------------------
-    print("🔠 正在统计: 2. risk_type_stats.csv")
-    type_stats = df.groupby('risk_type').agg(
-        event_count=('record_id', 'count'),
-        total_penalty_amount=('penalty_amount', 'sum'),
-        avg_risk_score=('risk_score', 'mean'),
-        high_risk_count=('risk_level', lambda x: (x == '高').sum())
-    ).reset_index()
-    # 严格重排字段顺序
-    type_stats = type_stats[['risk_type', 'event_count', 'total_penalty_amount', 'avg_risk_score', 'high_risk_count']]
-    type_stats.to_csv(f"{output_dir}/risk_type_stats.csv", index=False)
+    type_stats = (
+        df.groupby("risk_type", dropna=False)
+        .agg(
+            event_count=("record_id", "count"),
+            total_penalty_amount=("penalty_amount", "sum"),
+            avg_risk_score=("risk_score", "mean"),
+            high_risk_count=("risk_level", lambda values: values.fillna("").astype(str).str.lower().eq("high").sum()),
+        )
+        .reset_index()
+    )
+    type_stats.to_csv(output_dir / "risk_type_stats.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 3. risk_time_trend.csv (字段: month,regulation_count,news_count,comment_count,high_risk_count,total_penalty_amount,avg_risk_score)
-    # -------------------------------------------------------------------------
-    print("📅 正在统计: 3. risk_time_trend.csv")
-    time_trend = df.groupby('month').agg(
-        regulation_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == 'regulation').sum()),
-        news_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == 'news').sum()),
-        comment_count=('record_id', lambda x: (df.loc[x.index, 'source_type'] == 'comment').sum()),
-        high_risk_count=('risk_level', lambda x: (x == '高').sum()),
-        avg_risk_score=('risk_score', 'mean'),
-        total_penalty_amount=('penalty_amount', lambda x: pd.to_numeric(x, errors='coerce').fillna(0).sum())
-    ).reset_index()
-    # 严格重排字段顺序
-    time_trend = time_trend[['month', 'regulation_count', 'news_count', 'comment_count', 'high_risk_count', 'total_penalty_amount', 'avg_risk_score']]
-    time_trend.to_csv(f"{output_dir}/risk_time_trend.csv", index=False)
+    time_trend = (
+        df.groupby("month", dropna=False)
+        .agg(
+            regulation_count=("source_type", lambda values: (values == "regulation").sum()),
+            news_count=("source_type", lambda values: (values == "news").sum()),
+            comment_count=("source_type", lambda values: (values == "comment").sum()),
+            high_risk_count=("risk_level", lambda values: values.fillna("").astype(str).str.lower().eq("high").sum()),
+            total_penalty_amount=("penalty_amount", "sum"),
+            avg_risk_score=("risk_score", "mean"),
+        )
+        .reset_index()
+        .sort_values("month")
+    )
+    time_trend.to_csv(output_dir / "risk_time_trend.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 4. region_risk_stats.csv (字段: region,event_count,total_penalty_amount,high_risk_count,avg_risk_score)
-    # -------------------------------------------------------------------------
-    print("📍 正在统计: 4. region_risk_stats.csv")
-    region_stats = df.groupby('region').agg(
-        event_count=('record_id', 'count'),
-        total_penalty_amount=('penalty_amount', 'sum'),
-        high_risk_count=('risk_level', lambda x: (x == '高').sum()),
-        avg_risk_score=('risk_score', 'mean')
-    ).reset_index()
-    # 严格重排字段顺序
-    region_stats = region_stats[['region', 'event_count', 'total_penalty_amount', 'high_risk_count', 'avg_risk_score']]
-    region_stats.to_csv(f"{output_dir}/region_risk_stats.csv", index=False)
+    region_stats = (
+        df.groupby("region", dropna=False)
+        .agg(
+            event_count=("record_id", "count"),
+            total_penalty_amount=("penalty_amount", "sum"),
+            high_risk_count=("risk_level", lambda values: values.fillna("").astype(str).str.lower().eq("high").sum()),
+            avg_risk_score=("risk_score", "mean"),
+        )
+        .reset_index()
+        .sort_values(["event_count", "avg_risk_score"], ascending=[False, False])
+    )
+    region_stats.to_csv(output_dir / "region_risk_stats.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 5. entity_risk_rank.csv (字段: entity_name,entity_type,region,event_count,total_penalty_amount,avg_risk_score,risk_level)
-    # -------------------------------------------------------------------------
-    print("🏢 正在统计: 5. entity_risk_rank.csv")
-    entity_stats = df.groupby('entity_name').agg(
-        entity_type=('entity_type', 'first'),
-        region=('region', 'first'),
-        event_count=('record_id', 'count'),
-        total_penalty_amount=('penalty_amount', 'sum'),
-        avg_risk_score=('risk_score', 'mean')
-    ).reset_index()
-    entity_stats['risk_level'] = entity_stats['avg_risk_score'].apply(lambda x: '高' if x > 60 else ('中' if x > 30 else '低'))
-    # 严格排序与截取字段
-    entity_stats = entity_stats.sort_values(by='avg_risk_score', ascending=False)
-    entity_stats = entity_stats[['entity_name', 'entity_type', 'region', 'event_count', 'total_penalty_amount', 'avg_risk_score', 'risk_level']]
-    entity_stats.to_csv(f"{output_dir}/entity_risk_rank.csv", index=False)
+    entity_df = df[~df["entity_name"].isin(["", "unknown_entity"])].copy()
+    entity_stats = (
+        entity_df.groupby("entity_name", dropna=False)
+        .agg(
+            entity_type=("entity_type", "first"),
+            region=("region", "first"),
+            event_count=("record_id", "count"),
+            total_penalty_amount=("penalty_amount", "sum"),
+            avg_risk_score=("risk_score", "mean"),
+        )
+        .reset_index()
+        .sort_values(["avg_risk_score", "event_count"], ascending=[False, False])
+    )
+    entity_stats["risk_level"] = entity_stats["avg_risk_score"].apply(
+        lambda value: "high" if value > 60 else ("medium" if value > 30 else "low")
+    )
+    entity_stats.to_csv(output_dir / "entity_risk_rank.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 6. sentiment_trend.csv (字段: month,negative_news_count,negative_comment_count,negative_ratio,avg_sentiment_score)
-    # -------------------------------------------------------------------------
-    print("📣 正在统计: 6. sentiment_trend.csv")
-    sent_trend = df.groupby('month').agg(
-        negative_news_count=('sentiment', lambda x: ((x == '负面') & (df.loc[x.index, 'source_type'] == 'news')).sum()),
-        negative_comment_count=('sentiment', lambda x: ((x == '负面') & (df.loc[x.index, 'source_type'] == 'comment')).sum()),
-        avg_sentiment_score=('sentiment_score', 'mean'),
-        total_in_month=('record_id', 'count')
-    ).reset_index()
-    sent_trend['negative_ratio'] = (
-        (sent_trend['negative_news_count'] + sent_trend['negative_comment_count'])
-        / sent_trend['total_in_month']
+    sent_trend = (
+        df.groupby("month", dropna=False)
+        .agg(
+            negative_news_count=("record_id", lambda idx: ((df.loc[idx.index, "source_type"] == "news") & negative_mask.loc[idx.index]).sum()),
+            negative_comment_count=("record_id", lambda idx: ((df.loc[idx.index, "source_type"] == "comment") & negative_mask.loc[idx.index]).sum()),
+            avg_sentiment_score=("sentiment_score", "mean"),
+            total_in_month=("record_id", "count"),
+        )
+        .reset_index()
+        .sort_values("month")
+    )
+    sent_trend["negative_ratio"] = (
+        (sent_trend["negative_news_count"] + sent_trend["negative_comment_count"]) / sent_trend["total_in_month"]
     ).round(4)
-    # 严格重排字段顺序
-    sent_trend = sent_trend[['month', 'negative_news_count', 'negative_comment_count', 'negative_ratio', 'avg_sentiment_score']]
-    sent_trend.to_csv(f"{output_dir}/sentiment_trend.csv", index=False)
+    sent_trend = sent_trend[["month", "negative_news_count", "negative_comment_count", "negative_ratio", "avg_sentiment_score"]]
+    sent_trend.to_csv(output_dir / "sentiment_trend.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 7. risk_relation_matrix.csv (字段: entity_type,risk_type,event_count,avg_risk_score)
-    # -------------------------------------------------------------------------
-    print("🕸️ 正在统计: 7. risk_relation_matrix.csv")
-    relation = df.groupby(['entity_type', 'risk_type']).agg(
-        event_count=('record_id', 'count'),
-        avg_risk_score=('risk_score', 'mean')
-    ).reset_index()
-    relation = relation[['entity_type', 'risk_type', 'event_count', 'avg_risk_score']]
-    relation.to_csv(f"{output_dir}/risk_relation_matrix.csv", index=False)
+    relation = (
+        df.groupby(["entity_type", "risk_type"], dropna=False)
+        .agg(event_count=("record_id", "count"), avg_risk_score=("risk_score", "mean"))
+        .reset_index()
+    )
+    relation.to_csv(output_dir / "risk_relation_matrix.csv", index=False, encoding="utf-8-sig")
 
-    # -------------------------------------------------------------------------
-    # 8. risk_warning_cases.csv (字段: entity_name,warning_reason,evidence_sources,risk_score,suggested_action)
-    # -------------------------------------------------------------------------
-    print("🚨 正在统计: 8. risk_warning_cases.csv")
-    high_df = df[df['risk_score'] > 40].sort_values(by='risk_score', ascending=False).head(5)
-    cases_data = {
-        "entity_name": high_df['entity_name'].tolist(),
-        "warning_reason": high_df['violation_reason'].tolist(),
-        "evidence_sources": high_df['source_type'].tolist(),
-        "risk_score": high_df['risk_score'].tolist(),
-        "suggested_action": ["建议列入高风险重点监控名单并收紧授信额度"] * len(high_df)
-    }
-    cases_df = pd.DataFrame(cases_data)
-    cases_df = cases_df[['entity_name', 'warning_reason', 'evidence_sources', 'risk_score', 'suggested_action']]
-    cases_df.to_csv(f"{output_dir}/risk_warning_cases.csv", index=False)
+    high_df = df[(df["risk_score"] > 40) & (~df["entity_name"].isin(["", "unknown_entity"]))].sort_values(
+        by="risk_score", ascending=False
+    ).head(10)
+    cases_df = pd.DataFrame(
+        {
+            "entity_name": high_df["entity_name"].tolist(),
+            "warning_reason": high_df["violation_reason"].tolist(),
+            "evidence_sources": high_df["source_type"].tolist(),
+            "risk_score": high_df["risk_score"].tolist(),
+            "suggested_action": ["add to manual review queue and verify against source URL"] * len(high_df),
+        }
+    )
+    cases_df.to_csv(output_dir / "risk_warning_cases.csv", index=False, encoding="utf-8-sig")
+    print(f"Analysis completed: {output_dir}")
 
-    print("\n✨ 【SUCCESS】已经100%严格按照组长字段规范，重新输出全部 8 张分析结果表格！")
 
 if __name__ == "__main__":
     main()

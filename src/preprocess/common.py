@@ -46,6 +46,8 @@ REGIONS = (
 
 
 def read_csv(path):
+    if not Path(path).exists():
+        return []
     with Path(path).open("r", encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
 

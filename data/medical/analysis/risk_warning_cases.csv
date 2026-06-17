@@ -1,0 +1,11 @@
+﻿entity_name,warning_reason,evidence_sources,risk_score,suggested_action
+国家医保局基金监管司约谈一心堂药业集团股份有限公司,medical risk event derived from regulation or health news,regulation,54.8,add to manual review queue and verify against source URL
+国家医保局基金监管司有关负责人就约谈一心堂药业集团股份有限公司,medical risk event derived from regulation or health news,regulation,54.8,add to manual review queue and verify against source URL
+积水潭等四家国家级医院,medical risk event derived from regulation or health news,news,54.8,add to manual review queue and verify against source URL
+齐鲁医院,medical risk event derived from regulation or health news,news,50.0,add to manual review queue and verify against source URL
+齐鲁医院,medical risk event derived from regulation or health news,news,50.0,add to manual review queue and verify against source URL
+上榜2024年度中医药,medical risk event derived from regulation or health news,news,45.0,add to manual review queue and verify against source URL
+与华中科技大学同济医学院附属同济医院,medical risk event derived from regulation or health news,news,45.0,add to manual review queue and verify against source URL
+长沙市中心医院,medical risk event derived from regulation or health news,news,45.0,add to manual review queue and verify against source URL
+江苏省南通市启东市中医院,medical risk event derived from regulation or health news,news,45.0,add to manual review queue and verify against source URL
+国家医疗保障局关于开展2025年定点医药,medical risk event derived from regulation or health news,regulation,44.8,add to manual review queue and verify against source URL

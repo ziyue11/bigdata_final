@@ -1,0 +1,41 @@
+2026-06-15 15:57:12,690 WARNING bing rss failed query=site:nhc.gov.cn 医疗 行政处罚 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:18,501 WARNING bing rss failed query=site:nhc.gov.cn 医疗 行政处罚 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:24,330 WARNING bing rss failed query=site:nhc.gov.cn 医院 行政处罚 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:29,333 WARNING bing rss failed query=site:nhc.gov.cn 医院 行政处罚 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:34,347 WARNING bing rss failed query=site:wjw.beijing.gov.cn 医疗机构 行政处罚 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:39,351 WARNING bing rss failed query=site:wjw.beijing.gov.cn 医疗机构 行政处罚 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:45,127 WARNING bing rss failed query=site:wsjkw.sh.gov.cn 行政处罚 医疗机构 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:50,132 WARNING bing rss failed query=site:wsjkw.sh.gov.cn 行政处罚 医疗机构 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:57:55,138 WARNING bing rss failed query=site:wsjkw.sh.gov.cn 行政处罚 医疗机构 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:00,390 WARNING bing rss failed query=site:samr.gov.cn 医疗 行政处罚 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:07,160 WARNING bing rss failed query=site:samr.gov.cn 医疗 行政处罚 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:12,179 WARNING bing rss failed query=site:samr.gov.cn 医疗 行政处罚 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:17,209 WARNING bing rss failed query=site:amr.gd.gov.cn 医疗器械 行政处罚 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:22,214 WARNING bing rss failed query=site:amr.gd.gov.cn 医疗器械 行政处罚 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:27,219 WARNING bing rss failed query=site:amr.gd.gov.cn 医疗器械 行政处罚 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:32,223 WARNING bing rss failed query=site:scjgj.beijing.gov.cn 医疗 行政处罚 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:37,228 WARNING bing rss failed query=site:scjgj.beijing.gov.cn 医疗 行政处罚 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:42,234 WARNING bing rss failed query=site:scjgj.beijing.gov.cn 医疗 行政处罚 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:47,238 WARNING bing rss failed query=site:scjgj.sh.gov.cn 医疗 行政处罚 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:52,260 WARNING bing rss failed query=site:scjgj.sh.gov.cn 医疗 行政处罚 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:58:57,266 WARNING bing rss failed query=site:scjgj.sh.gov.cn 医疗 行政处罚 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:02,289 WARNING bing rss failed query=site:nmpa.gov.cn 行政处罚 药品 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:07,292 WARNING bing rss failed query=site:nmpa.gov.cn 行政处罚 药品 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:12,310 WARNING bing rss failed query=site:nmpa.gov.cn 行政处罚 药品 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:17,314 WARNING bing rss failed query=site:nmpa.gov.cn 行政处罚 医疗器械 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:22,339 WARNING bing rss failed query=site:nmpa.gov.cn 行政处罚 医疗器械 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:27,342 WARNING bing rss failed query=site:nmpa.gov.cn 行政处罚 医疗器械 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:32,346 WARNING bing rss failed query=site:mpa.gd.gov.cn 行政处罚 药品 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:37,362 WARNING bing rss failed query=site:mpa.gd.gov.cn 行政处罚 药品 page=1 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:42,928 WARNING bing rss failed query=site:mpa.gd.gov.cn 行政处罚 药品 page=2 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:48,342 WARNING bing rss failed query=site:yjj.beijing.gov.cn 行政处罚 医疗器械 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 15:59:56,443 WARNING gdelt failed query=医疗 健康 医院 OR 医疗服务 error=HTTP Error 429: Too Many Requests
+2026-06-15 15:59:58,096 WARNING gdelt failed query=医院 管理 医疗质量 OR 医患 error=HTTP Error 429: Too Many Requests
+2026-06-15 16:02:42,638 WARNING gdelt failed query=药品 监管 医疗器械 OR 医药反腐 error=The read operation timed out
+2026-06-15 16:02:45,452 WARNING bing rss failed query=医院管理 医疗质量 新闻 page=0 error=<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+2026-06-15 16:03:04,862 WARNING online crawl returned 350 rows; using offline fallback dataset
+2026-06-15 16:03:04,864 WARNING using offline fallback dataset
+2026-06-15 16:03:04,867 INFO regulation_nhc rows=80
+2026-06-15 16:03:04,869 INFO regulation_samr rows=80
+2026-06-15 16:03:04,870 INFO regulation_nmpa rows=80
+2026-06-15 16:03:04,872 INFO regulation_creditchina rows=80

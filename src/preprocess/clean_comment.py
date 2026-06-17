@@ -28,7 +28,10 @@ FIELDS = [
 
 
 def clean_comment(raw_dir, output_path):
-    input_path = Path(raw_dir) / "comment_raw.csv"
+    raw_dir = Path(raw_dir)
+    input_path = raw_dir / "medical_comment_raw.csv"
+    if not input_path.exists() and not (raw_dir / "medical_news_raw.csv").exists():
+        input_path = raw_dir / "comment_raw.csv"
     raw_rows = read_csv(input_path)
     invalid_count = 0
     cleaned = []

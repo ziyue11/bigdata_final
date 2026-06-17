@@ -1,0 +1,5 @@
+2026-06-16 22:20:03,458 INFO Start preprocessing industry=economy raw_dir=C:\Users\ziyue\Desktop\bupt\大三下\大数据技术基础\期末实验\bigdata_final\data\economy\raw
+2026-06-16 22:20:03,918 INFO regulation_cleaned.csv raw=300 output=226 invalid_removed=0 duplicate_removed=74 fields=record_id,source_type,source,title,event_date,entity_name,raw_text,penalty_amount,agency,region,url
+2026-06-16 22:20:03,918 INFO news_cleaned.csv raw=200 output=200 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,content,mentioned_entity,channel,url
+2026-06-16 22:20:03,918 INFO comment_cleaned.csv raw=1100 output=1100 invalid_removed=0 duplicate_removed=0 fields=record_id,source_type,source,title,event_date,content,mentioned_entity,read_count,comment_count,url
+2026-06-16 22:20:03,921 INFO Finished preprocessing industry=economy

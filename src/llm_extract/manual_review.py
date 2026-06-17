@@ -1,10 +1,15 @@
 # src/llm_extract/manual_review.py
 
-import pandas as pd
 import os
+from pathlib import Path
+
+import pandas as pd
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 def create_review_sample():
-    input_path = 'data/processed/llm_extracted.csv'
+    input_path = str(ROOT / 'data' / 'economy' / 'processed' / 'llm_extracted.csv')
     output_dir = 'docs/manual_review/'
     output_path = os.path.join(output_dir, 'manual_review.csv')
     
